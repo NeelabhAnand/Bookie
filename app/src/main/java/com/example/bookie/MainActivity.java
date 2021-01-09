@@ -2,6 +2,7 @@ package com.example.bookie;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private AppCompatEditText mEtBookName;
     private AppCompatImageButton mBtnSearch;
     private AppCompatImageButton mBtnClear;
+    private ProgressBar mProgressBar;
     private RecyclerView mRvBooks;
     private BooksAdapter mAdapter;
     private ArrayList<Volume> mVolumes = new ArrayList<>();
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         mEtBookName = findViewById(R.id.et_book_name);
         mBtnSearch = findViewById(R.id.btn_search);
         mBtnClear = findViewById(R.id.btn_clear);
+        mProgressBar = findViewById(R.id.progressBar);
         mRvBooks = findViewById(R.id.rv_books);
 
         mRvBooks.setLayoutManager(new LinearLayoutManager(this));
@@ -62,11 +65,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void searchBooks() {
+        showProgress();
         ApiClient client = ApiClient.getInstance();
         BooksApi service = client.createService(BooksApi.class);
         service.getBooks(mEtBookName.getText().toString(), MAX_RESULTS).enqueue(new Callback<BookResponse>() {
             @Override
             public void onResponse(@NotNull Call<BookResponse> call, @NotNull Response<BookResponse> response) {
+                hideProgress();
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
                         if (response.body().getVolumes() != null) {
@@ -82,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NotNull Call<BookResponse> call, @NotNull Throwable t) {
+                hideProgress();
                 showToast(t.getMessage() != null ? t.getMessage() : "Please check ur network connection");
             }
         });
@@ -92,7 +98,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void clearBooks() {
+        mEtBookName.setText("");
         mVolumes.clear();
         mAdapter.notifyDataSetChanged();
+    }
+
+    private void showProgress() {
+        mRvBooks.setVisibility(View.GONE);
+        mProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    private void hideProgress() {
+        mProgressBar.setVisibility(View.GONE);
+        mRvBooks.setVisibility(View.VISIBLE);
     }
 }
