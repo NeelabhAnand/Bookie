@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.bookie.models.BookResponse;
 import com.example.bookie.models.Volume;
 import com.example.bookie.network.ApiClient;
-import com.example.bookie.network.BooksApi;
+import com.example.bookie.network.BooksService;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
     private void searchBooks() {
         showProgress();
         ApiClient client = ApiClient.getInstance();
-        BooksApi service = client.createService(BooksApi.class);
+        BooksService service = client.createService(BooksService.class);
         service.getBooks(mEtBookName.getText().toString(), MAX_RESULTS).enqueue(new Callback<BookResponse>() {
             @Override
             public void onResponse(@NotNull Call<BookResponse> call, @NotNull Response<BookResponse> response) {
