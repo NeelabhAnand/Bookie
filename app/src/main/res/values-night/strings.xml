@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="book_search_query_hint">Book name</string>
+    <string name="activity_main_book_search_query_hint">Book name</string>
 </resources>

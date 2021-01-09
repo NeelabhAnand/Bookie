@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Hello!"
+        android:text="@string/activity_main_title"
         android:textColor="@color/black"
         android:textSize="30sp"
         android:textStyle="italic" />
@@ -27,7 +27,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.8"
-            android:hint="@string/book_search_query_hint" />
+            android:hint="@string/activity_main_book_search_query_hint" />
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/btn_search"

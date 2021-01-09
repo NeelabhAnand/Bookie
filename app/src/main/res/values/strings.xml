@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Bookie</string>
-    <string name="book_search_query_hint">Book name</string>
+    <string name="activity_main_book_search_query_hint">Book name</string>
+    <string name="activity_main_title">Hello Chudail!</string>
 </resources>
