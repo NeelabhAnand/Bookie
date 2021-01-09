@@ -9,7 +9,7 @@
         android:id="@+id/iv_item_book_image"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        tools:src="@drawable/ic_book_image_placeholder" />
+        android:src="@drawable/ic_book_image_placeholder" />
 
     <LinearLayout
         android:layout_width="match_parent"

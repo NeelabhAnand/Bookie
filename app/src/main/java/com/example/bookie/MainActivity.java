@@ -8,6 +8,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private AppCompatEditText mEtBookName;
     private AppCompatImageButton mBtnSearch;
     private AppCompatImageButton mBtnClear;
+    private AppCompatTextView mTvEmpty;
     private ProgressBar mProgressBar;
     private RecyclerView mRvBooks;
     private BooksAdapter mAdapter;
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         mBtnSearch = findViewById(R.id.btn_search);
         mBtnClear = findViewById(R.id.btn_clear);
         mProgressBar = findViewById(R.id.progressBar);
+        mTvEmpty = findViewById(R.id.tv_activity_main_empty);
         mRvBooks = findViewById(R.id.rv_books);
 
         mRvBooks.setLayoutManager(new LinearLayoutManager(this));
@@ -99,11 +102,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void clearBooks() {
         mEtBookName.setText("");
+        mTvEmpty.setVisibility(View.VISIBLE);
         mVolumes.clear();
         mAdapter.notifyDataSetChanged();
     }
 
     private void showProgress() {
+        mTvEmpty.setVisibility(View.GONE);
         mRvBooks.setVisibility(View.GONE);
         mProgressBar.setVisibility(View.VISIBLE);
     }
