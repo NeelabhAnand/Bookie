@@ -5,9 +5,6 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Created by Neelabh Anand on 08/01/21.
- */
 public class ApiClient {
     private static final String BASE_URL = "https://www.googleapis.com/books/";
     private static ApiClient instance;

@@ -5,9 +5,6 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-/**
- * Created by Neelabh Anand on 08/01/21.
- */
 public class VolumeInfo implements Serializable {
 
     @SerializedName("title")
@@ -65,7 +62,10 @@ public class VolumeInfo implements Serializable {
 
         public void setSmallThumbnail(String smallThumbnail) {
             this.smallThumbnail = smallThumbnail;
+
         }
+
+
     }
 
 }

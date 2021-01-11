@@ -13,6 +13,7 @@ public interface BooksService {
 
     @GET("v1/volumes")
     Call<BookResponse> getBooks(@Query("q") String searchQuery,
-                                @Query("maxResults") int maxResults);
+                                @Query("maxResults") int maxResults,
+                                @Query("orderBy") String relevance);
 
 }

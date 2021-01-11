@@ -1,26 +1,32 @@
 package com.example.bookie;
 
+import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.bookie.models.Volume;
 import com.example.bookie.models.VolumeInfo;
 
 import java.util.ArrayList;
 
-/**
- * Created by Neelabh Anand on 08/01/21.
- */
+import static android.content.ContentValues.TAG;
+
 public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BookVH> {
     private final ArrayList<Volume> volumes;
+    private Context context;
 
-    public BooksAdapter(ArrayList<Volume> volumes) {
+
+    public BooksAdapter(Context context, ArrayList<Volume> volumes) {
         this.volumes = volumes;
+        this.context = context;
     }
 
     @NonNull
@@ -42,6 +48,13 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BookVH> {
             if (info.getPublishedDate() != null) {
                 holder.tvDate.setText(info.getPublishedDate());
             }
+
+            if (info.getImageLinks() != null) {
+                Glide.with(context).load(info.getImageLinks().getSmallThumbnail())
+                        .into(holder.tvImage);
+            }
+            Log.d(TAG, "onBindViewHolder() returned: " + "No data found");
+
         }
     }
 
@@ -54,6 +67,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BookVH> {
         private final AppCompatTextView tvTitle;
         private final AppCompatTextView tvAuthorName;
         private final AppCompatTextView tvDate;
+        private final AppCompatImageView tvImage;
 
         public BookVH(@NonNull View itemView) {
             super(itemView);
@@ -61,6 +75,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BookVH> {
             tvTitle = itemView.findViewById(R.id.tv_item_book_title);
             tvAuthorName = itemView.findViewById(R.id.tv_item_book_author_name);
             tvDate = itemView.findViewById(R.id.tv_item_book_date);
+            tvImage = itemView.findViewById(R.id.iv_item_book_image);
         }
     }
 }

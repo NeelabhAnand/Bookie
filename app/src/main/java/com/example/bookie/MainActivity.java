@@ -27,6 +27,7 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     private static final int MAX_RESULTS = 10;
+    private static final String relevance = "relevance";
     private AppCompatEditText mEtBookName;
     private AppCompatImageButton mBtnSearch;
     private AppCompatImageButton mBtnClear;
@@ -47,9 +48,8 @@ public class MainActivity extends AppCompatActivity {
         mProgressBar = findViewById(R.id.progressBar);
         mTvEmpty = findViewById(R.id.tv_activity_main_empty);
         mRvBooks = findViewById(R.id.rv_books);
-
         mRvBooks.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new BooksAdapter(mVolumes);
+        mAdapter = new BooksAdapter(this, mVolumes);
         mRvBooks.setAdapter(mAdapter);
 
         mBtnSearch.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         showProgress();
         ApiClient client = ApiClient.getInstance();
         BooksService service = client.createService(BooksService.class);
-        service.getBooks(mEtBookName.getText().toString(), MAX_RESULTS).enqueue(new Callback<BookResponse>() {
+        service.getBooks(mEtBookName.getText().toString(), MAX_RESULTS, relevance).enqueue(new Callback<BookResponse>() {
             @Override
             public void onResponse(@NotNull Call<BookResponse> call, @NotNull Response<BookResponse> response) {
                 hideProgress();
@@ -84,14 +84,14 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 } else {
-                    showToast("Something went wrong. Please again later.");
+                    showToast("Something went wrong. Please try again later.");
                 }
             }
 
             @Override
             public void onFailure(@NotNull Call<BookResponse> call, @NotNull Throwable t) {
                 hideProgress();
-                showToast(t.getMessage() != null ? t.getMessage() : "Please check ur network connection");
+                showToast(t.getMessage() != null ? t.getMessage() : "Please check your network connection");
             }
         });
     }

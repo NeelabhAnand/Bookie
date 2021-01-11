@@ -37,8 +37,8 @@
                 android:id="@+id/tv_item_book_date"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.4"
-                tools:text="16 Sep, 1997" />
+                android:layout_weight="0.3"
+                tools:text="1997-05-02" />
 
         </LinearLayout>
 
@@ -49,7 +49,7 @@
             android:layout_marginTop="10dp"
             android:maxLines="1"
             android:ellipsize="end"
-            tools:text="Written by me" />
+            tools:text="Written by Author" />
 
     </LinearLayout>
 
