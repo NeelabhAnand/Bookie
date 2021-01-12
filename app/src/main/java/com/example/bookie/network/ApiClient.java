@@ -7,6 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
     private static final String BASE_URL = "https://www.googleapis.com/books/";
+    private Retrofit mRetrofit;
     private static ApiClient instance;
 
     public static synchronized ApiClient getInstance() {
@@ -15,13 +16,15 @@ public class ApiClient {
     }
 
     public <S> S createService(Class<S> serviceClass) {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .client(getOkHttpClient())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        if (mRetrofit == null) {
+            mRetrofit = new Retrofit.Builder()
+                    .baseUrl(BASE_URL)
+                    .client(getOkHttpClient())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+        }
 
-        return retrofit.create(serviceClass);
+        return mRetrofit.create(serviceClass);
     }
 
     private okhttp3.OkHttpClient getOkHttpClient() {
