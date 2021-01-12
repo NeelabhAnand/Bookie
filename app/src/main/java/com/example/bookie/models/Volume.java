@@ -12,11 +12,22 @@ public class Volume implements Serializable {
     @SerializedName("volumeInfo")
     private VolumeInfo volumeInfo;
 
+    @SerializedName("id")
+    private String volumeId;
+
     public VolumeInfo getVolumeInfo() {
         return volumeInfo;
     }
 
     public void setVolumeInfo(VolumeInfo volumeInfo) {
         this.volumeInfo = volumeInfo;
+    }
+
+    public String getVolumeId() {
+        return volumeId;
+    }
+
+    public void setVolumeId(String volumeId) {
+        this.volumeId = volumeId;
     }
 }

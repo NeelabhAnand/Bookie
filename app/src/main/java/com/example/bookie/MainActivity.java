@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void OnItemClick(int position) {
                 Intent i = new Intent(MainActivity.this, VolumeDescriptionActivity.class);
-                i.putExtra(VolumeDescriptionActivity.EXTRA_VOLUME_ID, mVolumes.get(position).getVolumeInfo().getVolumeID());
+                i.putExtra(VolumeDescriptionActivity.EXTRA_VOLUME_ID, mVolumes.get(position).getVolumeId());
                 startActivity(i);
             }
         });
