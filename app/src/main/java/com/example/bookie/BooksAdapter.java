@@ -21,7 +21,7 @@ import static android.content.ContentValues.TAG;
 
 public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BookVH> {
     private final ArrayList<Volume> volumes;
-    private Context context;
+    private final Context context;
 
 
     public BooksAdapter(Context context, ArrayList<Volume> volumes) {

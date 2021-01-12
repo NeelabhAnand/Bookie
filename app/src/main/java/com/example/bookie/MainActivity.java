@@ -28,6 +28,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
     private static final int MAX_RESULTS = 10;
     private static final String relevance = "relevance";
+    private static String volumeID="id";
     private AppCompatEditText mEtBookName;
     private AppCompatImageButton mBtnSearch;
     private AppCompatImageButton mBtnClear;
@@ -71,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         showProgress();
         ApiClient client = ApiClient.getInstance();
         BooksService service = client.createService(BooksService.class);
-        service.getBooks(mEtBookName.getText().toString(), MAX_RESULTS, relevance).enqueue(new Callback<BookResponse>() {
+        service.getBooks(mEtBookName.getText().toString(), MAX_RESULTS, relevance, volumeID).enqueue(new Callback<BookResponse>() {
             @Override
             public void onResponse(@NotNull Call<BookResponse> call, @NotNull Response<BookResponse> response) {
                 hideProgress();

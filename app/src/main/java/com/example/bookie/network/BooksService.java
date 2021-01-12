@@ -4,6 +4,7 @@ import com.example.bookie.models.BookResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -14,6 +15,7 @@ public interface BooksService {
     @GET("v1/volumes")
     Call<BookResponse> getBooks(@Query("q") String searchQuery,
                                 @Query("maxResults") int maxResults,
-                                @Query("orderBy") String relevance);
+                                @Query("orderBy") String relevance,
+                                @Path("id") String volumeID);
 
 }
