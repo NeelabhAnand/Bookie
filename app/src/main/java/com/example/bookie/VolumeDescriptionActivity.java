@@ -1,22 +1,19 @@
 package com.example.bookie;
 
+import android.os.Bundle;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 
-import android.os.Bundle;
-import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.example.bookie.models.BookResponse;
-import com.example.bookie.models.Volume;
 import com.example.bookie.models.VolumeInfo;
 import com.example.bookie.network.ApiClient;
 import com.example.bookie.network.BooksService;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,7 +26,6 @@ public class VolumeDescriptionActivity extends AppCompatActivity {
     private AppCompatTextView d_author;
     private AppCompatImageView d_image;
     private AppCompatTextView d_desc;
-    private static final String volumeID = "id";
     public static final String EXTRA_VOLUME_ID= "VolumeId"; //made Intent key constant from MainActivity.
 
     @Override
@@ -47,15 +43,14 @@ public class VolumeDescriptionActivity extends AppCompatActivity {
 
         ApiClient client = ApiClient.getInstance();
         BooksService service = client.createService(BooksService.class);
-        service.getVolumeDetails(volumeID).enqueue(new Callback<BookResponse>() {
+        service.getVolumeDetails(idFromIntent).enqueue(new Callback<BookResponse>() {
             @Override
             public void onResponse(@NotNull Call<BookResponse> call, Response<BookResponse> response) {
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
                         display_desc();
                     }
-                }
-                else {
+                } else {
                     showToast("Something went wrong");
                 }
             }
