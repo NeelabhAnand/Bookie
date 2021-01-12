@@ -22,7 +22,7 @@ import static android.content.ContentValues.TAG;
 public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BookVH> {
     private final ArrayList<Volume> volumes;
     private final Context context;
-    private OnItemClickListener OnItem;
+    private OnItemClickListener itemClickListener;
 
     public BooksAdapter(Context context, ArrayList<Volume> volumes) {
         this.volumes = volumes;
@@ -56,16 +56,15 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BookVH> {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (OnItem != null) {
-                        OnItem.OnItemClick(holder.getAdapterPosition());
+                    if (itemClickListener != null) {
+                        itemClickListener.OnItemClick(holder.getAdapterPosition());
                     }
-
         }
             });
         }
     }
     public void setOnItemClickListener (OnItemClickListener OnItemListener){
-        this.OnItem = OnItemListener;
+        this.itemClickListener = OnItemListener;
     }
 
     @Override

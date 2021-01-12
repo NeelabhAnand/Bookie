@@ -22,7 +22,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class VolumeDesc extends AppCompatActivity {
+public class VolumeDescriptionActivity extends AppCompatActivity {
 
     private AppCompatTextView d_title;
     private AppCompatTextView d_subtitle;
@@ -30,6 +30,7 @@ public class VolumeDesc extends AppCompatActivity {
     private AppCompatImageView d_image;
     private AppCompatTextView d_desc;
     private static final String volumeID = "id";
+    public static final String EXTRA_VOLUME_ID= "VolumeId"; //made Intent key constant from MainActivity.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +43,11 @@ public class VolumeDesc extends AppCompatActivity {
         d_subtitle = findViewById(R.id.tv_item_book_subtitle);
         d_desc = findViewById(R.id.tv_item_book_desc);
 
+        String idFromIntent = getIntent().getStringExtra(EXTRA_VOLUME_ID);
+
         ApiClient client = ApiClient.getInstance();
         BooksService service = client.createService(BooksService.class);
-        service.getBooks(volumeID).enqueue(new Callback<BookResponse>() {
+        service.getVolumeDetails(volumeID).enqueue(new Callback<BookResponse>() {
             @Override
             public void onResponse(@NotNull Call<BookResponse> call, Response<BookResponse> response) {
                 if (response.isSuccessful()) {

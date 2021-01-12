@@ -25,6 +25,9 @@ public class VolumeInfo implements Serializable {
     @SerializedName("description")
     private String description;
 
+    @SerializedName("id")
+    private String volumeID;
+
     public String getTitle() {
         return title;
     }
@@ -59,6 +62,14 @@ public class VolumeInfo implements Serializable {
 
     public void setSubtitle(String subtitle) {
         this.subtitle = subtitle;
+    }
+
+    public String getVolumeID() {
+        return volumeID;
+    }
+
+    public void setVolumeID(String volumeID) {
+        this.volumeID = volumeID;
     }
 
     public ImageLinks getImageLinks() {

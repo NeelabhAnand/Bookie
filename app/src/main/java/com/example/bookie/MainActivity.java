@@ -67,6 +67,14 @@ public class MainActivity extends AppCompatActivity {
                 clearBooks();
             }
         });
+        mAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void OnItemClick(int position) {
+                Intent i = new Intent(MainActivity.this, VolumeDescriptionActivity.class);
+                i.putExtra(VolumeDescriptionActivity.EXTRA_VOLUME_ID, mVolumes.get(position).getVolumeInfo().getVolumeID());
+                startActivity(i);
+            }
+        });
     }
 
     private void searchBooks() {
@@ -84,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
                             mVolumes.clear();
                             mVolumes.addAll(response.body().getVolumes());
                             mAdapter.notifyDataSetChanged();
-
                         }
                     }
                 } else {
@@ -98,13 +105,7 @@ public class MainActivity extends AppCompatActivity {
                 showToast(t.getMessage() != null ? t.getMessage() : "Please check your network connection");
             }
         });
-        mAdapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void OnItemClick(int position) {
-                Intent i = new Intent(getApplicationContext(), VolumeDesc.class);
-                startActivity(i);
-            }
-        });
+
     }
 
     private void showToast(String message) {
