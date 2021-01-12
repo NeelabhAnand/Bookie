@@ -19,6 +19,12 @@ public class VolumeInfo implements Serializable {
     @SerializedName("imageLinks")
     private ImageLinks imageLinks;
 
+    @SerializedName("subtitle")
+    private String subtitle;
+
+    @SerializedName("description")
+    private String description;
+
     public String getTitle() {
         return title;
     }
@@ -43,6 +49,18 @@ public class VolumeInfo implements Serializable {
         this.authors = authors;
     }
 
+    public String getDescription() { return description; }
+
+    public void setDescription(String description) {this.description = description; }
+
+    public String getSubtitle() {
+        return subtitle;
+    }
+
+    public void setSubtitle(String subtitle) {
+        this.subtitle = subtitle;
+    }
+
     public ImageLinks getImageLinks() {
         return imageLinks;
     }
@@ -55,17 +73,18 @@ public class VolumeInfo implements Serializable {
 
         @SerializedName("smallThumbnail")
         private String smallThumbnail;
+        private String small;
 
         public String getSmallThumbnail() {
             return smallThumbnail;
         }
 
         public void setSmallThumbnail(String smallThumbnail) {
-            this.smallThumbnail = smallThumbnail;
+            this.smallThumbnail = smallThumbnail; }
 
-        }
+        public String getSmall() { return small; }
 
-
+        public void setSmall(String small) { this.small = small;}
     }
 
 }

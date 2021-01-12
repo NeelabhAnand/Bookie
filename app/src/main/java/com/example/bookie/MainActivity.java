@@ -1,5 +1,6 @@
 package com.example.bookie;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -28,7 +29,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
     private static final int MAX_RESULTS = 10;
     private static final String relevance = "relevance";
-    private static String volumeID="id";
+
     private AppCompatEditText mEtBookName;
     private AppCompatImageButton mBtnSearch;
     private AppCompatImageButton mBtnClear;
@@ -72,7 +73,8 @@ public class MainActivity extends AppCompatActivity {
         showProgress();
         ApiClient client = ApiClient.getInstance();
         BooksService service = client.createService(BooksService.class);
-        service.getBooks(mEtBookName.getText().toString(), MAX_RESULTS, relevance, volumeID).enqueue(new Callback<BookResponse>() {
+        service.getBooks(mEtBookName.getText().toString(), MAX_RESULTS, relevance).enqueue(new Callback<BookResponse>() {
+
             @Override
             public void onResponse(@NotNull Call<BookResponse> call, @NotNull Response<BookResponse> response) {
                 hideProgress();
@@ -82,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
                             mVolumes.clear();
                             mVolumes.addAll(response.body().getVolumes());
                             mAdapter.notifyDataSetChanged();
+
                         }
                     }
                 } else {
@@ -93,6 +96,13 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(@NotNull Call<BookResponse> call, @NotNull Throwable t) {
                 hideProgress();
                 showToast(t.getMessage() != null ? t.getMessage() : "Please check your network connection");
+            }
+        });
+        mAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void OnItemClick(int position) {
+                Intent i = new Intent(getApplicationContext(), VolumeDesc.class);
+                startActivity(i);
             }
         });
     }

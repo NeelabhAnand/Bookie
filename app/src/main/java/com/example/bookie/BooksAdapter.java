@@ -22,7 +22,7 @@ import static android.content.ContentValues.TAG;
 public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BookVH> {
     private final ArrayList<Volume> volumes;
     private final Context context;
-
+    private OnItemClickListener OnItem;
 
     public BooksAdapter(Context context, ArrayList<Volume> volumes) {
         this.volumes = volumes;
@@ -53,15 +53,26 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BookVH> {
                 Glide.with(context).load(info.getImageLinks().getSmallThumbnail())
                         .into(holder.tvImage);
             }
-            Log.d(TAG, "onBindViewHolder() returned: " + "No data found");
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (OnItem != null) {
+                        OnItem.OnItemClick(holder.getAdapterPosition());
+                    }
 
         }
+            });
+        }
+    }
+    public void setOnItemClickListener (OnItemClickListener OnItemListener){
+        this.OnItem = OnItemListener;
     }
 
     @Override
     public int getItemCount() {
         return volumes.size();
     }
+
 
     static class BookVH extends RecyclerView.ViewHolder {
         private final AppCompatTextView tvTitle;
@@ -78,4 +89,4 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BookVH> {
             tvImage = itemView.findViewById(R.id.iv_item_book_image);
         }
     }
-}
+    }
