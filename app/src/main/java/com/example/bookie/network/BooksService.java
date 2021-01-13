@@ -1,6 +1,7 @@
 package com.example.bookie.network;
 
 import com.example.bookie.models.BookResponse;
+import com.example.bookie.models.Volume;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -18,6 +19,6 @@ public interface BooksService {
                                 @Query("orderBy") String relevance);
 
     @GET("v1/volumes/{volumeId}")
-    Call<BookResponse> getVolumeDetails(@Path("volumeId") String volumeID);
+    Call<Volume> getVolumeDetails(@Path("volumeId") String volumeID);
 
 }

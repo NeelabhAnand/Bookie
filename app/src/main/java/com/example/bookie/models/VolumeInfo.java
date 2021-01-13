@@ -73,6 +73,8 @@ public class VolumeInfo implements Serializable {
 
         @SerializedName("smallThumbnail")
         private String smallThumbnail;
+
+        @SerializedName("small")
         private String small;
 
         public String getSmallThumbnail() {
