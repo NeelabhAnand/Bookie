@@ -26,7 +26,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnItemClickListener {
     private static final int MAX_RESULTS = 10;
     private static final String relevance = "relevance";
 
@@ -67,14 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 clearBooks();
             }
         });
-        mAdapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void OnItemClick(int position) {
-                Intent i = new Intent(MainActivity.this, VolumeDescriptionActivity.class);
-                i.putExtra(VolumeDescriptionActivity.EXTRA_VOLUME_ID, mVolumes.get(position).getVolumeId());
-                startActivity(i);
-            }
-        });
+        mAdapter.setOnItemClickListener(this);
     }
     private void searchBooks() {
 
@@ -130,4 +123,15 @@ public class MainActivity extends AppCompatActivity {
         mRvBooks.setVisibility(View.VISIBLE);
     }
 
+    @Override
+    public void OnItemClick(int position) {
+        new OnItemClickListener() {
+            @Override
+            public void OnItemClick(int position) {
+                Intent i = new Intent(MainActivity.this, VolumeDescriptionActivity.class);
+                i.putExtra(VolumeDescriptionActivity.EXTRA_VOLUME_ID, mVolumes.get(position).getVolumeId());
+                startActivity(i);
+            }
+        };
+    }
 }

@@ -6,27 +6,10 @@
     tools:context=".VolumeDescriptionActivity">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_activity_desc_empty"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:layout_centerInParent="true"
-            android:text="@string/volume_desc_activity_empty_text"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -47,9 +30,9 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_item_book_title1"
                 tools:text="Book Title"
-                android:textSize="48sp"
+                android:textSize="36sp"
                 android:layout_gravity="center_horizontal"
-                android:padding="5dp"/>
+                android:padding="15dp"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
@@ -78,6 +61,24 @@
                 android:padding="20dp"/>
 
         </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_activity_desc_empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:text="@string/volume_desc_activity_empty_text"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
 
     </RelativeLayout>
 

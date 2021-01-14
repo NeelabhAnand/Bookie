@@ -32,7 +32,7 @@ public class VolumeDescriptionActivity extends AppCompatActivity {
     private AppCompatTextView d_desc;
     public static final String EXTRA_VOLUME_ID= "VolumeId"; //made Intent key constant from MainActivity.
     private ProgressBar mProgressBar;
-    private LinearLayout mdescriptionView;
+    private LinearLayout mDescriptionView;
     private AppCompatTextView mTvEmpty;
 
     @Override
@@ -45,7 +45,7 @@ public class VolumeDescriptionActivity extends AppCompatActivity {
         d_author = findViewById(R.id.tv_item_book_author);
         d_subtitle = findViewById(R.id.tv_item_book_subtitle);
         d_desc = findViewById(R.id.tv_item_book_desc);
-        mdescriptionView = findViewById(R.id.description_view);
+        mDescriptionView = findViewById(R.id.description_view);
         mProgressBar = findViewById(R.id.progressBar);
         mTvEmpty = findViewById(R.id.tv_activity_desc_empty);
 
@@ -101,13 +101,13 @@ public class VolumeDescriptionActivity extends AppCompatActivity {
     }
     private void showProgressBar() {
         mTvEmpty.setVisibility(View.GONE);
-        mdescriptionView.setVisibility(View.GONE);
+        mDescriptionView.setVisibility(View.GONE);
         mProgressBar.setVisibility(View.VISIBLE);
     }
 
     private void hideProgressBar() {
         mProgressBar.setVisibility(View.GONE);
-        mdescriptionView.setVisibility(View.VISIBLE);
+        mDescriptionView.setVisibility(View.VISIBLE);
     }
 
 }
