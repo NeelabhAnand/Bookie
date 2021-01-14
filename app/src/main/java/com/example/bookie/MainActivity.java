@@ -28,8 +28,7 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     private static final int MAX_RESULTS = 10;
-    private static final String relevance = "relevance";
-
+    private static final String RELEVANCE = "relevance";
     private AppCompatEditText mEtBookName;
     private AppCompatImageButton mBtnSearch;
     private AppCompatImageButton mBtnClear;
@@ -44,16 +43,35 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        initView();
+        initAdapter();
+        setOnClickListeners();
+    }
+
+    private void initView(){
         mEtBookName = findViewById(R.id.et_book_name);
         mBtnSearch = findViewById(R.id.btn_search);
         mBtnClear = findViewById(R.id.btn_clear);
         mProgressBar = findViewById(R.id.progressBar);
         mTvEmpty = findViewById(R.id.tv_activity_main_empty);
         mRvBooks = findViewById(R.id.rv_books);
+    }
+
+    private void initAdapter(){
         mRvBooks.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new BooksAdapter(this, mVolumes);
         mRvBooks.setAdapter(mAdapter);
+        mAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void OnItemClick(int position) {
+                Intent i = new Intent(MainActivity.this, VolumeDescriptionActivity.class);
+                i.putExtra(VolumeDescriptionActivity.EXTRA_VOLUME_ID, mVolumes.get(position).getVolumeId());
+                startActivity(i);
+            }
+        });
+    }
 
+    private void setOnClickListeners(){
         mBtnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,22 +85,12 @@ public class MainActivity extends AppCompatActivity {
                 clearBooks();
             }
         });
-        mAdapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void OnItemClick(int position) {
-                Intent i = new Intent(MainActivity.this, VolumeDescriptionActivity.class);
-                i.putExtra(VolumeDescriptionActivity.EXTRA_VOLUME_ID, mVolumes.get(position).getVolumeId());
-                startActivity(i);
-            }
-        });
     }
+
     private void searchBooks() {
-
         showProgress();
-        ApiClient client = ApiClient.getInstance();
-        BooksService service = client.createService(BooksService.class);
-        service.getBooks(mEtBookName.getText().toString(), MAX_RESULTS, relevance).enqueue(new Callback<BookResponse>() {
-
+        BooksService service = ApiClient.getInstance().createService(BooksService.class);
+        service.getBooks(mEtBookName.getText().toString(), MAX_RESULTS, RELEVANCE).enqueue(new Callback<BookResponse>() {
             @Override
             public void onResponse(@NotNull Call<BookResponse> call, @NotNull Response<BookResponse> response) {
                 hideProgress();
