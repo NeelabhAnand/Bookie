@@ -1,5 +1,5 @@
 package com.example.bookie;
 
 public interface OnItemClickListener {
-    public void OnItemClick(int position);
+    void OnItemClick(int position);
 }
