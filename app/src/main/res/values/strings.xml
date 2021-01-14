@@ -3,5 +3,6 @@
     <string name="activity_main_book_search_query_hint">Book name</string>
     <string name="activity_main_title">Let\'s Search Books</string>
     <string name="activity_main_empty_text">Search something!</string>
+    <string name="volume_desc_activity_empty_text">Loading, Please Wait</string>
 
 </resources>

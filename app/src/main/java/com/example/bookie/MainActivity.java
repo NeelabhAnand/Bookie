@@ -76,8 +76,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     private void searchBooks() {
+
         showProgress();
         ApiClient client = ApiClient.getInstance();
         BooksService service = client.createService(BooksService.class);
@@ -129,4 +129,5 @@ public class MainActivity extends AppCompatActivity {
         mProgressBar.setVisibility(View.GONE);
         mRvBooks.setVisibility(View.VISIBLE);
     }
+
 }
