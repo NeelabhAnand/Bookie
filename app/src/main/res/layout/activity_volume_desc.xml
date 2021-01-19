@@ -1,85 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".VolumeDescriptionActivity">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-
-
         <LinearLayout
+            android:id="@+id/description_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/description_view">
+            android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_item_book_thumbnail"
                 android:layout_width="150dp"
                 android:layout_height="250dp"
-                android:id="@+id/iv_item_book_thumbnail"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="30dp"
-                android:src="@drawable/ic_book_image_placeholder"/>
+                android:src="@drawable/ic_book_image_placeholder" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/tv_item_book_title1"
-                tools:text="Book Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:padding="15dp"
                 android:textSize="36sp"
-                android:layout_gravity="center_horizontal"
-                android:padding="15dp"/>
+                tools:text="Book Title" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/tv_item_book_author"
-                tools:text="Author Name"
-                android:textSize="24sp"
-                android:layout_gravity="center_horizontal"
-                android:padding="5dp"/>
-
-            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:padding="5dp"
+                android:textSize="24sp"
+                tools:text="Author Name" />
+
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_item_book_subtitle"
-                tools:text="Mai theek hu or aage se aise text nhi use krne"
-                android:textSize="24sp"
-                android:layout_gravity="center_horizontal"
-                android:padding="5dp"/>
-
-            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:padding="5dp"
+                android:textSize="24sp"
+                tools:text="Mai theek hu or aage se aise text nhi use krne" />
+
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_item_book_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
                 android:textSize="20sp"
-                tools:text="hello how are you ?khana kha ke jana. ok?"
-                android:padding="20dp"/>
+                tools:text="hello how are you ?khana kha ke jana. ok?" />
 
         </LinearLayout>
 
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"/>
+    </ScrollView>
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_activity_desc_empty"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:gravity="center_horizontal"
-            android:text="@string/volume_desc_activity_empty_text"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
 
-    </RelativeLayout>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_activity_desc_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/progressBar"
+        android:layout_centerHorizontal="true"
+        android:text="@string/volume_desc_activity_empty_text"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
 
-</ScrollView>
+</RelativeLayout>
