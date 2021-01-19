@@ -8,11 +8,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiClient {
     private static final String BASE_URL = "https://www.googleapis.com/books/";
     private Retrofit mRetrofit;
-    private static ApiClient instance;
+    private static ApiClient sInstance;
 
+    private ApiClient(){}
     public static synchronized ApiClient getInstance() {
-        if (instance == null) instance = new ApiClient();
-        return instance;
+        if (sInstance == null) sInstance = new ApiClient();
+        return sInstance;
     }
 
     public <S> S createService(Class<S> serviceClass) {
