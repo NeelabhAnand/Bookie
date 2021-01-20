@@ -1,5 +1,6 @@
 package com.example.bookie;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -29,19 +30,20 @@ public class VolumeDescriptionActivity extends AppCompatActivity {
     private AppCompatImageView mIvThumbnail;
     private AppCompatTextView mTvDescription;
     public static final String EXTRA_VOLUME_ID = "VolumeId"; //made Intent key constant from MainActivity.
-    private ProgressBar mProgressBar;
+
     private LinearLayout mLvDescription;
-    private AppCompatTextView mTvEmpty;
-    private String mVolumeId;
+    private VolumeInfo mVolumeInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_volume_desc);
-
-        mVolumeId = getIntent().getStringExtra(EXTRA_VOLUME_ID);
         initView();
-        getVolumeDetail();
+
+        if(getIntent().getSerializableExtra(EXTRA_VOLUME_ID) != null) {
+            mVolumeInfo = (VolumeInfo) getIntent().getSerializableExtra(EXTRA_VOLUME_ID);
+            displayDesc(mVolumeInfo);
+        }
     }
 
     private void initView() {
@@ -51,67 +53,29 @@ public class VolumeDescriptionActivity extends AppCompatActivity {
         mTvSubTitle = findViewById(R.id.tv_item_book_subtitle);
         mTvDescription = findViewById(R.id.tv_item_book_desc);
         mLvDescription = findViewById(R.id.description_view);
-        mProgressBar = findViewById(R.id.progressBar);
-        mTvEmpty = findViewById(R.id.tv_activity_desc_empty);
     }
 
-    private void getVolumeDetail() {
-        showProgressBar();
-        BooksService service = ApiClient.getInstance().createService(BooksService.class);
-        service.getVolumeDetails(mVolumeId).enqueue(new Callback<Volume>() {
-            @Override
-            public void onResponse(@NotNull Call<Volume> call, @NotNull Response<Volume> response) {
-                hideProgressBar();
-                if (response.isSuccessful()) {
-                    if (response.body() != null) {
-                        displayDesc(response.body().getVolumeInfo());
-                    }
-                } else {
-                    showToast("Something went wrong");
-                }
-            }
-
-            @Override
-            public void onFailure(@NotNull Call<Volume> call, @NotNull Throwable t) {
-                hideProgressBar();
-                showToast(t.getMessage() != null ? t.getMessage() : "Please check your network connection");
-            }
-        });
-    }
 
     public void displayDesc(VolumeInfo info) {
-        if (info.getTitle() != null) {
-            mTvTitle.setText(info.getTitle());
-        }
-        if (info.getSubtitle() != null) {
-            mTvSubTitle.setText(info.getSubtitle());
-        } else
-            mTvSubTitle.setVisibility(View.GONE);
+        if (info!=null) {
+            if (info.getTitle() != null) {
+                mTvTitle.setText(info.getTitle());
+            }
+            if (info.getSubtitle() != null) {
+                mTvSubTitle.setText(info.getSubtitle());
+            } else
+                mTvSubTitle.setVisibility(View.GONE);
 
-        if (info.getDescription() != null) {
-            mTvDescription.setText(info.getDescription());
+            if (info.getDescription() != null) {
+                mTvDescription.setText(info.getDescription());
+            }
+            if (info.getImageLinks() != null) {
+                Glide.with(this).load(info.getImageLinks().getSmall()).into(mIvThumbnail);
+            }
+            if (info.getAuthors() != null) {
+                mTvAuthor.setText(info.getAuthors().get(0));
+            }
         }
-        if (info.getImageLinks() != null) {
-            Glide.with(this).load(info.getImageLinks().getSmall()).into(mIvThumbnail);
-        }
-        if (info.getAuthors() != null) {
-            mTvAuthor.setText(info.getAuthors().get(0));
-        }
-    }
-
-    private void showToast(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-    }
-
-    private void showProgressBar() {
-        mTvEmpty.setVisibility(View.GONE);
-        mLvDescription.setVisibility(View.GONE);
-        mProgressBar.setVisibility(View.VISIBLE);
-    }
-
-    private void hideProgressBar() {
-        mProgressBar.setVisibility(View.GONE);
-        mLvDescription.setVisibility(View.VISIBLE);
     }
 
 }
