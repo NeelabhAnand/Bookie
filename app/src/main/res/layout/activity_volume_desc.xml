@@ -10,7 +10,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#a5e2e7">
+            android:background="#787bb0">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_item_book_thumbnail"
@@ -30,7 +30,7 @@
                 android:paddingTop="15dp"
                 style="@style/volume_desc_text_view"
                 android:textSize="24sp"
-                android:textColor="#154c79"
+                android:textColor="@color/white"
                 tools:text="Book Title"
                 android:textStyle="bold"
                 />
@@ -39,14 +39,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/volume_desc_text_view"
-                android:text="@string/by" />
+                android:text="@string/by"
+                android:textColor="#bdc0f2"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_item_book_author"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/volume_desc_text_view"
-                android:textColor="#154c79"
+                android:textColor="@color/white"
                 tools:text="Author Name"
                 />
 
@@ -55,6 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/volume_desc_text_view"
+                android:textColor="#bdc0f2"
                 tools:text="Mai theek hu or aage se aise text nhi use krne" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -62,7 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/volume_desc_text_view"
-                android:textColor="#154c79"
+                android:textColor="@color/white"
                 tools:text="hello how are you ?khana kha ke jana. ok?" />
 
         </LinearLayout>
