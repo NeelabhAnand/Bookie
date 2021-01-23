@@ -36,7 +36,8 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
     private static final int MAX_RESULTS = 10;
     private static final String RELEVANCE = "relevance";
-    private static String selectedFilter = "ebooks";
+    private static final int REQUEST_CODE_FILTER = 1124;
+    private String selectedFilter = null;
     private AppCompatEditText mEtBookName;
     private AppCompatImageButton mBtnSearch;
     private AppCompatImageButton mBtnClear;
@@ -45,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
     private ProgressBar mProgressBar;
     private RecyclerView mRvBooks;
     private BooksAdapter mAdapter;
-    public static final int REQUEST_CODE_FILTER = 1124;
     private ArrayList<Volume> mVolumes = new ArrayList<>();
 
     @Override
@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
         initView();
         initAdapter();
         setOnClickListeners();
-
        }
 
     private void initView(){
@@ -100,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         mBtnFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectFilter();
+                gotoFilter();
             }
         });
     }
@@ -144,19 +143,15 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-
             super.onActivityResult(requestCode, resultCode, data);
-
             if (requestCode == REQUEST_CODE_FILTER  && resultCode  == RESULT_OK) {
-
                 selectedFilter = data.getStringExtra("filterClicked");
-
-
             }
     }
 
-    private void selectFilter(){
+    private void gotoFilter(){
         Intent i = new Intent(MainActivity.this, FilterActivity.class);
+        i.putExtra("selectedFilterFromActivity", selectedFilter);
         startActivityForResult(i,REQUEST_CODE_FILTER);
     }
 
@@ -169,9 +164,6 @@ public class MainActivity extends AppCompatActivity {
     private void hideProgress() {
         mProgressBar.setVisibility(View.GONE);
         mRvBooks.setVisibility(View.VISIBLE);
-
     }
-
-
-    }
+}
 

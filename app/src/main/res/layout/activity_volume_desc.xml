@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".VolumeDescriptionActivity">
+    tools:context=".VolumeDescriptionActivity"
+    android:background="#787bb0">
 
         <LinearLayout
             android:id="@+id/description_view"

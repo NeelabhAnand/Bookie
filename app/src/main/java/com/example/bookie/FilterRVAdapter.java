@@ -1,6 +1,7 @@
 package com.example.bookie;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +16,13 @@ public class FilterRVAdapter extends RecyclerView.Adapter<FilterRVAdapter.Filter
 
     private final ArrayList<String> filters;
     private OnItemClickListener itemClickListener;
+    private String chosenFilter;
 
-    public FilterRVAdapter(ArrayList<String> filters) {
+
+    public FilterRVAdapter(ArrayList<String> filters, String chosenFilter) {
         this.filters = filters;
-    }
+        this.chosenFilter = chosenFilter;
+        }
 
     @NonNull
     @Override
@@ -30,6 +34,9 @@ public class FilterRVAdapter extends RecyclerView.Adapter<FilterRVAdapter.Filter
     public void onBindViewHolder(@NonNull FilterRVAdapter.FilterVH holder, int position) {
 
         holder.tvFilters.setText(filters.get(position));
+        if (filters.get(position).equals(chosenFilter)){
+            holder.tvFilters.setTypeface(null, Typeface.BOLD_ITALIC);
+        }
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -38,6 +45,7 @@ public class FilterRVAdapter extends RecyclerView.Adapter<FilterRVAdapter.Filter
                 }
             }
         });
+
 
     }
     public void setOnItemClickListener (OnItemClickListener OnItemListener){
