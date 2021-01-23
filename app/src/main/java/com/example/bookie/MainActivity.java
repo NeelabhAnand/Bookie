@@ -1,14 +1,9 @@
 package com.example.bookie;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.Toast;
-
-import androidx.annotation.IntDef;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
@@ -16,19 +11,14 @@ import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.bookie.models.BookResponse;
 import com.example.bookie.models.Volume;
-import com.example.bookie.models.VolumeInfo;
 import com.example.bookie.network.ApiClient;
 import com.example.bookie.network.BooksService;
+import com.example.bookie.utils.Preference;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -46,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private ProgressBar mProgressBar;
     private RecyclerView mRvBooks;
     private BooksAdapter mAdapter;
+
     private ArrayList<Volume> mVolumes = new ArrayList<>();
 
     @Override
@@ -106,8 +97,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void searchBooks() {
         showProgress();
+        Preference filterPref = Preference.getInstance(this);
         BooksService service = ApiClient.getInstance().createService(BooksService.class);
-        service.getBooks(mEtBookName.getText().toString(), MAX_RESULTS, RELEVANCE, selectedFilter).enqueue(new Callback<BookResponse>() {
+        service.getBooks(mEtBookName.getText().toString(), MAX_RESULTS, RELEVANCE, filterPref.getSelectedFilter()).enqueue(new Callback<BookResponse>() {
             @Override
             public void onResponse(@NotNull Call<BookResponse> call, @NotNull Response<BookResponse> response) {
                 hideProgress();
@@ -141,18 +133,9 @@ public class MainActivity extends AppCompatActivity {
         mAdapter.notifyDataSetChanged();
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-            super.onActivityResult(requestCode, resultCode, data);
-            if (requestCode == REQUEST_CODE_FILTER  && resultCode  == RESULT_OK) {
-                selectedFilter = data.getStringExtra("filterClicked");
-            }
-    }
-
     private void gotoFilter(){
         Intent i = new Intent(MainActivity.this, FilterActivity.class);
-        i.putExtra("selectedFilterFromActivity", selectedFilter);
-        startActivityForResult(i,REQUEST_CODE_FILTER);
+        startActivity(i);
     }
 
     private void showProgress() {

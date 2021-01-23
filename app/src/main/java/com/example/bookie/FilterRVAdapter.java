@@ -1,6 +1,5 @@
 package com.example.bookie;
 
-import android.content.Context;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.bookie.utils.Preference;
+
 import java.util.ArrayList;
 
 public class FilterRVAdapter extends RecyclerView.Adapter<FilterRVAdapter.FilterVH> {
@@ -17,7 +18,6 @@ public class FilterRVAdapter extends RecyclerView.Adapter<FilterRVAdapter.Filter
     private final ArrayList<String> filters;
     private OnItemClickListener itemClickListener;
     private String chosenFilter;
-
 
     public FilterRVAdapter(ArrayList<String> filters, String chosenFilter) {
         this.filters = filters;
@@ -34,7 +34,7 @@ public class FilterRVAdapter extends RecyclerView.Adapter<FilterRVAdapter.Filter
     public void onBindViewHolder(@NonNull FilterRVAdapter.FilterVH holder, int position) {
 
         holder.tvFilters.setText(filters.get(position));
-        if (filters.get(position).equals(chosenFilter)){
+        if (filters.get(position).equalsIgnoreCase(chosenFilter)){
             holder.tvFilters.setTypeface(null, Typeface.BOLD_ITALIC);
         }
         holder.itemView.setOnClickListener(new View.OnClickListener(){
@@ -45,8 +45,6 @@ public class FilterRVAdapter extends RecyclerView.Adapter<FilterRVAdapter.Filter
                 }
             }
         });
-
-
     }
     public void setOnItemClickListener (OnItemClickListener OnItemListener){
         this.itemClickListener = OnItemListener;
@@ -57,7 +55,6 @@ public class FilterRVAdapter extends RecyclerView.Adapter<FilterRVAdapter.Filter
     public int getItemCount() {
         return filters.size();
     }
-
 
     static class FilterVH extends RecyclerView.ViewHolder {
         private final AppCompatTextView tvFilters;
