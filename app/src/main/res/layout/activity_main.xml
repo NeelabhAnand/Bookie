@@ -43,6 +43,13 @@
             android:layout_weight="0.1"
             android:src="@drawable/ic_clear" />
 
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_filter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:src="@drawable/ic_filter_list"/>
+
     </LinearLayout>
 
     <RelativeLayout

@@ -16,9 +16,7 @@ public interface BooksService {
     @GET("v1/volumes")
     Call<BookResponse> getBooks(@Query("q") String searchQuery,
                                 @Query("maxResults") int maxResults,
-                                @Query("orderBy") String relevance);
-
-    @GET("v1/volumes/{volumeId}")
-    Call<Volume> getVolumeDetails(@Path("volumeId") String volumeID);
+                                @Query("orderBy") String relevance,
+                                @Query("filter") String filter);
 
 }

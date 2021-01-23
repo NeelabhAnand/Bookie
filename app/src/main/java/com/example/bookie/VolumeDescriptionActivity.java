@@ -44,6 +44,7 @@ public class VolumeDescriptionActivity extends AppCompatActivity {
             mVolumeInfo = (VolumeInfo) getIntent().getSerializableExtra(EXTRA_VOLUME_ID);
             displayDesc(mVolumeInfo);
         }
+
     }
 
     private void initView() {
@@ -70,7 +71,7 @@ public class VolumeDescriptionActivity extends AppCompatActivity {
                 mTvDescription.setText(info.getDescription());
             }
             if (info.getImageLinks() != null) {
-                Glide.with(this).load(info.getImageLinks().getSmall()).into(mIvThumbnail);
+                Glide.with(this).load(info.getImageLinks().getSmallThumbnail()).into(mIvThumbnail);
             }
             if (info.getAuthors() != null) {
                 mTvAuthor.setText(info.getAuthors().get(0));
